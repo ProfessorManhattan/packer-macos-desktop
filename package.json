@@ -1,0 +1,84 @@
+{
+  "name": "@megabytelabs/packer-macos-desktop",
+  "version": "1.0.0",
+  "description": "An automated macOS Big Sur Desktop Packer project that builds boxes using the latest Big Sur sources",
+  "license": "MIT",
+  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
+  "scripts": {
+    "build": "trash build && packer build template.json",
+    "build:parallels": "trash build && packer build -only=parallels-iso template.json",
+    "build:virtualbox": "trash build && packer build -only=virtualbox-iso template.json",
+    "build:vmware": "trash build && packer build -only=vmware-iso template.json",
+    "commit": "git-cz",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"{scripts/*.custom.sh,*.json}\" --write",
+    "fix:shellcheck": "shellcheck -f diff scripts/*.custom.sh | git apply",
+    "info": "npm-scripts-info",
+    "postinstall": "husky install && run-s update",
+    "launch": "vagrant up",
+    "prepare-release": "run-s update test version",
+    "test": "run-s test:*",
+    "test:packer": "packer validate template.json",
+    "test:prettier": "prettier \"{scripts/*.custom.sh,*.json}\" --list-different",
+    "test:shellcheck": "shellcheck scripts/*.custom.sh",
+    "update": "bash .start.sh && cp ./.modules/packer/.start.sh .start.sh",
+    "version": "standard-version --no-verify"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@megabytelabs/prettier-config": "^1.2.893",
+    "consola": "^2.15.3",
+    "cspell": "^5.4.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^5.2.0",
+    "lint-staged": "^10.5.4",
+    "npm-run-all": "^4.1.5",
+    "npm-scripts-info": "^0.3.9",
+    "prettier": "^2.1.1",
+    "prettier-package-json": "^2.5.0",
+    "prettier-plugin-sh": "^0.6.1",
+    "shellcheck": "^1.0.0",
+    "standard-version": "^9.3.0",
+    "trash-cli": "^4.0.0"
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
+  "lint-staged": {
+    "*.{json}": [
+      "prettier --write"
+    ],
+    "scripts/*.custom.sh": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "prettier-package-json --write"
+    ]
+  },
+  "prettier": "@megabytelabs/prettier-config",
+  "scripts-info": {
+    "build": "Build all of the images",
+    "build:parallels": "Build a Parallels image",
+    "build:virtualbox": "Build a VirtualBox image",
+    "build:vmware": "Build a VMWare image",
+    "commit": "The preferred way of running git commit (instead of git commit, we prefer running 'npm run commit')",
+    "fix": "Automatically fix formatting errors",
+    "info": "Logs descriptions of all the npm tasks",
+    "launch": "Runs 'vagrant up' to automatically spin up the VM",
+    "prepare-release": "Updates the CHANGELOG with commits made using 'npm run commit' and updates the project to be ready for release",
+    "test": "Validates the Packer configuration file (i.e. template.json) and performs some other linting",
+    "update": "Runs .start.sh to automatically update meta files and documentation",
+    "version": "Used by 'npm run prepare-release' to update the CHANGELOG and app version"
+  }
+}

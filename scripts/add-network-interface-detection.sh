@@ -1,0 +1,1 @@
+../.modules/osx-vm-templates/scripts/add-network-interface-detection.sh

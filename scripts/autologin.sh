@@ -1,0 +1,1 @@
+../.modules/osx-vm-templates/scripts/autologin.sh

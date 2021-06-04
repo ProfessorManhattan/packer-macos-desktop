@@ -1,0 +1,10 @@
+.vagrant/
+output/
+packer_cache/
+build/
+node_modules/
+.DS_Store
+npm-debug.log
+virtio-win.iso
+virtio-win-*.iso
+windows.iso

@@ -1,0 +1,9 @@
+{
+  "badge_style": "flat",
+  "description_template": "macOS ISO_VERSION (Big Sur)",
+  "description_template_package": "An automated macOS Big Sur Desktop Packer project that builds boxes using the latest Big Sur sources",
+  "hostname": "vagrant-macos",
+  "slug": "macos-desktop",
+  "vagrant_tag": "macos",
+  "version_description": "Minimal macOS ISO_VERSION (Big Sur). Built from the latest macOS Big Sur image. See https://gitlab.com/megabyte-labs/packer/macos-desktop for more details."
+}
