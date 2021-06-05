@@ -18,3 +18,7 @@
 	path = .modules/osx-vm-templates
 	url = https://github.com/timsutton/osx-vm-templates.git
 	branch = master
+[submodule ".modules/macos-virtualbox"]
+	path = .modules/macos-virtualbox
+	url = https://github.com/myspaghetti/macos-virtualbox.git
+	branch = master

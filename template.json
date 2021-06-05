@@ -9,9 +9,8 @@
     "install_xcode_cli_tools": "true",
     "iso_url": "OSX_InstallESD_10.11.1_15B42.dmg",
     "iso_version": "11.0.0",
-    "output_directory": "{{env `PACKER_OUTPUT_DIR`}}",
     "provisioning_delay": "0",
-    "shutdown_command": "echo '{{ user `ssh_username` }}' | sudo -S shutdown -h now",
+    "shutdown_command": "echo 'vagrant' | sudo -S shutdown -h now",
     "ssh_password": "vagrant",
     "ssh_port": "22",
     "ssh_username": "vagrant",
@@ -47,34 +46,6 @@
         ["set", "{{ .Name }}", "--on-window-close", "keep-running"],
         ["set", "{{ .Name }}", "--shf-host", "off"]
       ]
-    },
-    {
-      "type": "vmware-iso",
-      "boot_wait": "{{ user `boot_wait` }}",
-      "disk_size": "{{ user `disk_size` }}",
-      "guest_os_type": "darwin12-64",
-      "iso_checksum_type": "none",
-      "iso_url": "{{ user `iso_url` }}",
-      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VMWare",
-      "shutdown_command": "{{ user `shutdown_command` }}",
-      "skip_compaction": true,
-      "ssh_password": "{{user `ssh_password`}}",
-      "ssh_port": "{{ user `ssh_port` }}",
-      "ssh_username": "{{user `ssh_username`}}",
-      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
-      "tools_upload_flavor": "darwin",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "1",
-        "memsize": "4096",
-        "numvcpus": "1",
-        "firmware": "efi",
-        "keyboardAndMouseProfile": "macProfile",
-        "smc.present": "TRUE",
-        "hpet0.present": "TRUE",
-        "ich7m.present": "TRUE",
-        "ehci.present": "TRUE",
-        "usb.present": "TRUE"
-      }
     },
     {
       "type": "virtualbox-iso",
@@ -126,6 +97,34 @@
         ["modifyvm", "{{ .Name }}", "--mouse", "usbtablet"],
         ["modifyvm", "{{ .Name }}", "--vram", "256"]
       ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "{{ user `boot_wait` }}",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_os_type": "darwin12-64",
+      "iso_checksum_type": "none",
+      "iso_url": "{{ user `iso_url` }}",
+      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VMWare",
+      "shutdown_command": "{{ user `shutdown_command` }}",
+      "skip_compaction": true,
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
+      "tools_upload_flavor": "darwin",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "4096",
+        "numvcpus": "1",
+        "firmware": "efi",
+        "keyboardAndMouseProfile": "macProfile",
+        "smc.present": "TRUE",
+        "hpet0.present": "TRUE",
+        "ich7m.present": "TRUE",
+        "ehci.present": "TRUE",
+        "usb.present": "TRUE"
+      }
     }
   ],
   "post-processors": [
