@@ -14,7 +14,7 @@
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
     </a>
-    <a href="https://app.vagrantup.com/variables.vagrantup_user/boxes/macOS-Desktop" title="macOS 11.0.0 (Big Sur) box on VagrantUp.com" target="_blank">
+    <a href="https://app.vagrantup.com/Megabyte/boxes/macOS-Desktop" title="macOS 11.0.0 (Big Sur) box on VagrantUp.com" target="_blank">
       <img height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/vagrant.svg" />
     </a>
     <a href="https://gitlab.com/megabyte-labs/packer/macos-desktop/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
@@ -87,7 +87,7 @@
 
 This repository contains the source code used to automatically build minimal macOS 11.0.0 (Big Sur) VM images. The build process closely imitates the same process used by [chef/bento](https://github.com/chef/bento). In fact, you will see that most of the `scripts/` folder is symlinked to a chef/bento submodule.
 
-This repository automates most of the process of keeping our [macOS 11.0.0 (Big Sur) VM images](https://app.vagrantup.com/variables.vagrantup_user/boxes/macOS-Desktop) up-to-date with the latest upstream source by:
+This repository automates most of the process of keeping our [macOS 11.0.0 (Big Sur) VM images](https://app.vagrantup.com/Megabyte/boxes/macOS-Desktop) up-to-date with the latest upstream source by:
 
 - Using the vagrant-cloud post-processor to automatically upload the box after it is built
 - Automating the retrieval of the source ISO file and checksum file by using another project of ours called [LatestOS](https://pypi.org/project/latestos/)

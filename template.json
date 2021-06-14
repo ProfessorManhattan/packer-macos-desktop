@@ -4,36 +4,44 @@
     "boot_wait": "2s",
     "box_basename": "macOS-Desktop",
     "build_directory": "build",
+    "compression_level": "9",
+    "cpus": "2",
+    "description": "macOS 11.0.0 (Big Sur)",
     "disk_size": "40960",
     "install_vagrant_keys": "true",
     "install_xcode_cli_tools": "true",
+    "iso_checksum": "281281d1d01f9bfd18851b07d8e31254993c0a55c421124fb6d5cb20e4294132",
     "iso_url": "OSX_InstallESD_10.11.1_15B42.dmg",
     "iso_version": "11.0.0",
+    "memory": "4096",
     "provisioning_delay": "0",
     "shutdown_command": "echo 'vagrant' | sudo -S shutdown -h now",
     "ssh_password": "vagrant",
     "ssh_port": "22",
+    "ssh_timeout": "10000s",
     "ssh_username": "vagrant",
-    "ssh_wait_timeout": "10000s",
     "update_system": "true",
-    "description": "macOS 11.0.0 (Big Sur)",
+    "vagrantup_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
+    "vagrantup_user": "Megabyte",
     "version_description": "Minimal macOS 11.0.0 (Big Sur). Built from the latest macOS Big Sur image. See https://gitlab.com/megabyte-labs/packer/macos-desktop for more details."
   },
   "builders": [
     {
       "type": "parallels-iso",
       "boot_wait": "5s",
+      "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
       "guest_os_type": "win-8",
-      "iso_checksum_type": "none",
+      "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
       "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-Parallels",
       "parallels_tools_flavor": "mac",
       "shutdown_command": "{{ user `shutdown_command` }}",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
       "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
       "prlctl": [
         ["set", "{{ .Name }}", "--memsize", "4096"],
         ["set", "{{ .Name }}", "--memquota", "512:4096"],
@@ -45,24 +53,28 @@
         ["set", "{{ .Name }}", "--auto-share-bluetooth", "off"],
         ["set", "{{ .Name }}", "--on-window-close", "keep-running"],
         ["set", "{{ .Name }}", "--shf-host", "off"]
-      ]
+      ],
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}"
     },
     {
       "type": "virtualbox-iso",
       "boot_wait": "{{ user `boot_wait` }}",
+      "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
       "guest_additions_mode": "disable",
       "guest_os_type": "MacOS1011_64",
       "hard_drive_interface": "sata",
-      "iso_checksum_type": "none",
+      "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_interface": "sata",
       "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
       "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VirtualBox",
       "shutdown_command": "{{ user `shutdown_command` }}",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
       "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}",
       "vboxmanage": [
         ["modifyvm", "{{ .Name }}", "--audiocontroller", "hda"],
         ["modifyvm", "{{ .Name }}", "--boot1", "dvd"],
@@ -78,60 +90,50 @@
       ]
     },
     {
-      "type": "virtualbox-ovf",
-      "boot_wait": "{{ user `boot_wait` }}",
-      "guest_additions_mode": "disable",
-      "shutdown_command": "{{ user `shutdown_command` }}",
-      "source_path": "{{ user `source_path` }}",
-      "ssh_password": "{{ user `ssh_password` }}",
-      "ssh_port": "{{ user `ssh_port` }}",
-      "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
-      "vboxmanage": [
-        ["modifyvm", "{{ .Name }}", "--audiocontroller", "hda"],
-        ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
-        ["modifyvm", "{{ .Name }}", "--firmware", "efi"],
-        ["modifyvm", "{{ .Name }}", "--hpet", "on"],
-        ["modifyvm", "{{ .Name }}", "--keyboard", "usb"],
-        ["modifyvm", "{{ .Name }}", "--memory", "4096"],
-        ["modifyvm", "{{ .Name }}", "--mouse", "usbtablet"],
-        ["modifyvm", "{{ .Name }}", "--vram", "256"]
-      ]
-    },
-    {
       "type": "vmware-iso",
       "boot_wait": "{{ user `boot_wait` }}",
+      "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
       "guest_os_type": "darwin12-64",
-      "iso_checksum_type": "none",
+      "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
       "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VMWare",
       "shutdown_command": "{{ user `shutdown_command` }}",
       "skip_compaction": true,
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
       "ssh_username": "{{user `ssh_username`}}",
-      "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
       "tools_upload_flavor": "darwin",
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
-        "memsize": "4096",
-        "numvcpus": "1",
+        "ehci.present": "TRUE",
         "firmware": "efi",
-        "keyboardAndMouseProfile": "macProfile",
-        "smc.present": "TRUE",
         "hpet0.present": "TRUE",
         "ich7m.present": "TRUE",
-        "ehci.present": "TRUE",
-        "usb.present": "TRUE"
+        "keyboardAndMouseProfile": "macProfile",
+        "smc.present": "TRUE"
       }
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "{{ user `build_directory` }}/{{ user `box_basename` }}.{{ .Provider }}.box"
-    }
+    [
+      {
+        "type": "vagrant",
+        "compression_level": "{{ user `compression_level` }}",
+        "output": "{{ user `build_directory` }}/{{ user `box_basename` }}.{{ .Provider }}.box",
+        "vagrantfile_template": "{{ template_dir }}/Vagrantfile"
+      },
+      {
+        "type": "vagrant-cloud",
+        "access_token": "{{ user `vagrantup_token` }}",
+        "box_tag": "{{ user `vagrantup_user` }}/{{ user `box_basename` }}",
+        "version_description": "{{ user `version_description` }}",
+        "version": "{{ user `iso_version` }}"
+      }
+    ]
   ],
   "provisioners": [
     {

@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.ssh.username = "vagrant"
 
   config.vm.define "macos" do |os|
-    os.vm.box="null/macOS-Desktop"
+    os.vm.box="Megabyte/macOS-Desktop"
     os.vm.hostname = "vagrant-macos"
 
     os.vm.network "forwarded_port", guest: 22, host: 58022, id: "ssh", auto_correct: true
