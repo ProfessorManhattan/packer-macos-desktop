@@ -1,0 +1,2 @@
+
+bab2a054f6a258badb39e04eafdd974e637b2241	{"key":"make-fetch-happen:request-cache:https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz","integrity":"sha1-clVrgM+g1IqXToDnckjoDtT3+HA=","time":1623738071347,"size":3935,"metadata":{"url":"https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz","reqHeaders":{},"resHeaders":{"cache-control":"public, immutable, max-age=31557600","content-type":"application/octet-stream","date":"Tue, 15 Jun 2021 06:21:09 GMT","etag":"\"41b57c993d8571d9211d5b6c1c75ba7b\"","last-modified":"Sun, 27 May 2018 12:18:14 GMT","vary":"Accept-Encoding"}}}
