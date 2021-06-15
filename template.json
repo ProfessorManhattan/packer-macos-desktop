@@ -11,16 +11,66 @@
       "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-Parallels",
       "parallels_tools_flavor": "mac",
       "prlctl": [
-        ["set", "{{ .Name }}", "--memsize", "4096"],
-        ["set", "{{ .Name }}", "--memquota", "512:4096"],
-        ["set", "{{ .Name }}", "--cpus", "2"],
-        ["set", "{{ .Name }}", "--distribution", "macosx"],
-        ["set", "{{ .Name }}", "--3d-accelerate", "highest"],
-        ["set", "{{ .Name }}", "--high-resolution", "off"],
-        ["set", "{{ .Name }}", "--auto-share-camera", "off"],
-        ["set", "{{ .Name }}", "--auto-share-bluetooth", "off"],
-        ["set", "{{ .Name }}", "--on-window-close", "keep-running"],
-        ["set", "{{ .Name }}", "--shf-host", "off"]
+        [
+          "set",
+          "{{ .Name }}",
+          "--memsize",
+          "4096"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--memquota",
+          "512:4096"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--distribution",
+          "macosx"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--3d-accelerate",
+          "highest"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--high-resolution",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--auto-share-camera",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--auto-share-bluetooth",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--on-window-close",
+          "keep-running"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--shf-host",
+          "off"
+        ]
       ],
       "shutdown_command": "{{ user `shutdown_command` }}",
       "ssh_password": "{{ user `ssh_password` }}",
@@ -49,17 +99,73 @@
       "ssh_username": "{{ user `ssh_username` }}",
       "type": "virtualbox-iso",
       "vboxmanage": [
-        ["modifyvm", "{{ .Name }}", "--audiocontroller", "hda"],
-        ["modifyvm", "{{ .Name }}", "--boot1", "dvd"],
-        ["modifyvm", "{{ .Name }}", "--boot2", "disk"],
-        ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
-        ["modifyvm", "{{ .Name }}", "--firmware", "efi"],
-        ["modifyvm", "{{ .Name }}", "--hpet", "on"],
-        ["modifyvm", "{{ .Name }}", "--keyboard", "usb"],
-        ["modifyvm", "{{ .Name }}", "--memory", "4096"],
-        ["modifyvm", "{{ .Name }}", "--mouse", "usbtablet"],
-        ["modifyvm", "{{ .Name }}", "--vram", "256"],
-        ["storagectl", "{{ .Name }}", "--name", "IDE Controller", "--remove"]
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--audiocontroller",
+          "hda"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--boot1",
+          "dvd"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--boot2",
+          "disk"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--chipset",
+          "ich9"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--firmware",
+          "efi"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--hpet",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--keyboard",
+          "usb"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--mouse",
+          "usbtablet"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--vram",
+          "256"
+        ],
+        [
+          "storagectl",
+          "{{ .Name }}",
+          "--name",
+          "IDE Controller",
+          "--remove"
+        ]
       ],
       "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}"
     },
@@ -169,3 +275,4 @@
     "version_description": "Minimal macOS 11.0.0 (Big Sur). Built from the latest macOS Big Sur image. See https://gitlab.com/megabyte-labs/packer/macos-desktop for more details."
   }
 }
+
