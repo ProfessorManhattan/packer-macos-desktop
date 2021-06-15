@@ -1,4 +1,253 @@
 {
+  "builders": [
+    {
+      "boot_wait": "5s",
+      "cpus": "{{ user `cpus` }}",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_os_type": "win-8",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
+      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-Parallels",
+      "parallels_tools_flavor": "mac",
+      "prlctl": [
+        [
+          "set",
+          "{{ .Name }}",
+          "--memsize",
+          "4096"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--memquota",
+          "512:4096"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--distribution",
+          "macosx"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--3d-accelerate",
+          "highest"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--high-resolution",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--auto-share-camera",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--auto-share-bluetooth",
+          "off"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--on-window-close",
+          "keep-running"
+        ],
+        [
+          "set",
+          "{{ .Name }}",
+          "--shf-host",
+          "off"
+        ]
+      ],
+      "shutdown_command": "{{ user `shutdown_command` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "type": "parallels-iso",
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}"
+    },
+    {
+      "boot_wait": "{{ user `boot_wait` }}",
+      "cpus": "{{ user `cpus` }}",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_additions_mode": "disable",
+      "guest_os_type": "MacOS1011_64",
+      "hard_drive_interface": "sata",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_interface": "sata",
+      "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
+      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VirtualBox",
+      "shutdown_command": "{{ user `shutdown_command` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--audiocontroller",
+          "hda"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--boot1",
+          "dvd"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--boot2",
+          "disk"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--chipset",
+          "ich9"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--firmware",
+          "efi"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--hpet",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--keyboard",
+          "usb"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--mouse",
+          "usbtablet"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--vram",
+          "256"
+        ],
+        [
+          "storagectl",
+          "{{ .Name }}",
+          "--name",
+          "IDE Controller",
+          "--remove"
+        ]
+      ],
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}"
+    },
+    {
+      "boot_wait": "{{ user `boot_wait` }}",
+      "cpus": "{{ user `cpus` }}",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_os_type": "darwin12-64",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_url": "{{ user `iso_url` }}",
+      "memory": "{{ user `memory` }}",
+      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VMWare",
+      "shutdown_command": "{{ user `shutdown_command` }}",
+      "skip_compaction": true,
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": "{{ user `ssh_port` }}",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "tools_upload_flavor": "darwin",
+      "type": "vmware-iso",
+      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "ehci.present": "TRUE",
+        "firmware": "efi",
+        "hpet0.present": "TRUE",
+        "ich7m.present": "TRUE",
+        "keyboardAndMouseProfile": "macProfile",
+        "smc.present": "TRUE"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "compression_level": "{{ user `compression_level` }}",
+        "output": "{{ user `build_directory` }}/{{ user `box_basename` }}.{{ .Provider }}.box",
+        "type": "vagrant",
+        "vagrantfile_template": "{{ template_dir }}/Vagrantfile"
+      },
+      {
+        "access_token": "{{ user `vagrantup_token` }}",
+        "box_tag": "{{ user `vagrantup_user` }}/{{ user `box_basename` }}",
+        "type": "vagrant-cloud",
+        "version": "{{ user `iso_version` }}",
+        "version_description": "{{ user `version_description` }}"
+      }
+    ]
+  ],
+  "provisioners": [
+    {
+      "command": "sleep {{ user `provisioning_delay` }}",
+      "type": "shell-local"
+    },
+    {
+      "destination": "/private/tmp/set_kcpassword.py",
+      "source": "{{ template_dir }}/scripts/set_kcpassword.py",
+      "type": "file"
+    },
+    {
+      "environment_vars": [
+        "AUTOLOGIN={{ user `autologin` }}",
+        "INSTALL_VAGRANT_KEYS={{ user `install_vagrant_keys` }}",
+        "INSTALL_XCODE_CLI_TOOLS={{ user `install_xcode_cli_tools` }}",
+        "PASSWORD={{ user `ssh_password` }}",
+        "UPDATE_SYSTEM={{ user `update_system` }}",
+        "USERNAME={{ user `ssh_username` }}"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
+      "scripts": [
+        "{{ template_dir }}/scripts/vagrant.sh",
+        "{{ template_dir }}/scripts/vmware.sh",
+        "{{ template_dir }}/scripts/parallels.sh",
+        "{{ template_dir }}/scripts/xcode-cli-tools.sh",
+        "{{ template_dir }}/scripts/add-network-interface-detection.sh",
+        "{{ template_dir }}/scripts/autologin.sh",
+        "{{ template_dir }}/scripts/system-update.sh",
+        "{{ template_dir }}/scripts/shrink.sh"
+      ],
+      "type": "shell"
+    }
+  ],
   "variables": {
     "autologin": "true",
     "boot_wait": "2s",
@@ -24,148 +273,6 @@
     "vagrantup_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
     "vagrantup_user": "Megabyte",
     "version_description": "Minimal macOS 11.0.0 (Big Sur). Built from the latest macOS Big Sur image. See https://gitlab.com/megabyte-labs/packer/macos-desktop for more details."
-  },
-  "builders": [
-    {
-      "type": "parallels-iso",
-      "boot_wait": "5s",
-      "cpus": "{{ user `cpus` }}",
-      "disk_size": "{{ user `disk_size` }}",
-      "guest_os_type": "win-8",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_url": "{{ user `iso_url` }}",
-      "memory": "{{ user `memory` }}",
-      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-Parallels",
-      "parallels_tools_flavor": "mac",
-      "shutdown_command": "{{ user `shutdown_command` }}",
-      "ssh_password": "{{ user `ssh_password` }}",
-      "ssh_port": "{{ user `ssh_port` }}",
-      "ssh_timeout": "{{ user `ssh_timeout` }}",
-      "ssh_username": "{{ user `ssh_username` }}",
-      "prlctl": [
-        ["set", "{{ .Name }}", "--memsize", "4096"],
-        ["set", "{{ .Name }}", "--memquota", "512:4096"],
-        ["set", "{{ .Name }}", "--cpus", "2"],
-        ["set", "{{ .Name }}", "--distribution", "macosx"],
-        ["set", "{{ .Name }}", "--3d-accelerate", "highest"],
-        ["set", "{{ .Name }}", "--high-resolution", "off"],
-        ["set", "{{ .Name }}", "--auto-share-camera", "off"],
-        ["set", "{{ .Name }}", "--auto-share-bluetooth", "off"],
-        ["set", "{{ .Name }}", "--on-window-close", "keep-running"],
-        ["set", "{{ .Name }}", "--shf-host", "off"]
-      ],
-      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}"
-    },
-    {
-      "type": "virtualbox-iso",
-      "boot_wait": "{{ user `boot_wait` }}",
-      "cpus": "{{ user `cpus` }}",
-      "disk_size": "{{ user `disk_size` }}",
-      "guest_additions_mode": "disable",
-      "guest_os_type": "MacOS1011_64",
-      "hard_drive_interface": "sata",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_interface": "sata",
-      "iso_url": "{{ user `iso_url` }}",
-      "memory": "{{ user `memory` }}",
-      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VirtualBox",
-      "shutdown_command": "{{ user `shutdown_command` }}",
-      "ssh_password": "{{ user `ssh_password` }}",
-      "ssh_port": "{{ user `ssh_port` }}",
-      "ssh_timeout": "{{ user `ssh_timeout` }}",
-      "ssh_username": "{{ user `ssh_username` }}",
-      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}",
-      "vboxmanage": [
-        ["modifyvm", "{{ .Name }}", "--audiocontroller", "hda"],
-        ["modifyvm", "{{ .Name }}", "--boot1", "dvd"],
-        ["modifyvm", "{{ .Name }}", "--boot2", "disk"],
-        ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
-        ["modifyvm", "{{ .Name }}", "--firmware", "efi"],
-        ["modifyvm", "{{ .Name }}", "--hpet", "on"],
-        ["modifyvm", "{{ .Name }}", "--keyboard", "usb"],
-        ["modifyvm", "{{ .Name }}", "--memory", "4096"],
-        ["modifyvm", "{{ .Name }}", "--mouse", "usbtablet"],
-        ["modifyvm", "{{ .Name }}", "--vram", "256"],
-        ["storagectl", "{{ .Name }}", "--name", "IDE Controller", "--remove"]
-      ]
-    },
-    {
-      "type": "vmware-iso",
-      "boot_wait": "{{ user `boot_wait` }}",
-      "cpus": "{{ user `cpus` }}",
-      "disk_size": "{{ user `disk_size` }}",
-      "guest_os_type": "darwin12-64",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_url": "{{ user `iso_url` }}",
-      "memory": "{{ user `memory` }}",
-      "output_directory": "{{ user `build_directory` }}/{{ user `box_basename` }}-{{ user `iso_version` }}-VMWare",
-      "shutdown_command": "{{ user `shutdown_command` }}",
-      "skip_compaction": true,
-      "ssh_password": "{{user `ssh_password`}}",
-      "ssh_port": "{{ user `ssh_port` }}",
-      "ssh_timeout": "{{ user `ssh_timeout` }}",
-      "ssh_username": "{{user `ssh_username`}}",
-      "tools_upload_flavor": "darwin",
-      "vm_name": "{{ user `box_basename` }}-{{ user `iso_version` }}",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "1",
-        "ehci.present": "TRUE",
-        "firmware": "efi",
-        "hpet0.present": "TRUE",
-        "ich7m.present": "TRUE",
-        "keyboardAndMouseProfile": "macProfile",
-        "smc.present": "TRUE"
-      }
-    }
-  ],
-  "post-processors": [
-    [
-      {
-        "type": "vagrant",
-        "compression_level": "{{ user `compression_level` }}",
-        "output": "{{ user `build_directory` }}/{{ user `box_basename` }}.{{ .Provider }}.box",
-        "vagrantfile_template": "{{ template_dir }}/Vagrantfile"
-      },
-      {
-        "type": "vagrant-cloud",
-        "access_token": "{{ user `vagrantup_token` }}",
-        "box_tag": "{{ user `vagrantup_user` }}/{{ user `box_basename` }}",
-        "version_description": "{{ user `version_description` }}",
-        "version": "{{ user `iso_version` }}"
-      }
-    ]
-  ],
-  "provisioners": [
-    {
-      "type": "shell-local",
-      "command": "sleep {{ user `provisioning_delay` }}"
-    },
-    {
-      "type": "file",
-      "destination": "/private/tmp/set_kcpassword.py",
-      "source": "{{ template_dir }}/scripts/set_kcpassword.py"
-    },
-    {
-      "type": "shell",
-      "environment_vars": [
-        "AUTOLOGIN={{ user `autologin` }}",
-        "INSTALL_VAGRANT_KEYS={{ user `install_vagrant_keys` }}",
-        "INSTALL_XCODE_CLI_TOOLS={{ user `install_xcode_cli_tools` }}",
-        "PASSWORD={{ user `ssh_password` }}",
-        "UPDATE_SYSTEM={{ user `update_system` }}",
-        "USERNAME={{ user `ssh_username` }}"
-      ],
-      "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
-      "scripts": [
-        "{{ template_dir }}/scripts/vagrant.sh",
-        "{{ template_dir }}/scripts/vmware.sh",
-        "{{ template_dir }}/scripts/parallels.sh",
-        "{{ template_dir }}/scripts/xcode-cli-tools.sh",
-        "{{ template_dir }}/scripts/add-network-interface-detection.sh",
-        "{{ template_dir }}/scripts/autologin.sh",
-        "{{ template_dir }}/scripts/system-update.sh",
-        "{{ template_dir }}/scripts/shrink.sh"
-      ]
-    }
-  ]
+  }
 }
+
