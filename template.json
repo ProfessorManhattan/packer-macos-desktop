@@ -149,7 +149,7 @@
     "build_directory": "build",
     "compression_level": "9",
     "cpus": "2",
-    "description": "macOS 11.0.0 (Big Sur)",
+    "description": "macOS 11.0.0 (Monterey)",
     "disk_size": "40960",
     "install_vagrant_keys": "true",
     "install_xcode_cli_tools": "true",
@@ -166,6 +166,6 @@
     "update_system": "true",
     "vagrantup_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
     "vagrantup_user": "Megabyte",
-    "version_description": "Minimal macOS 11.0.0 (Big Sur). Built from the latest macOS Big Sur image. See https://gitlab.com/megabyte-labs/packer/macos-desktop for more details."
+    "version_description": "Minimal macOS 11.0.0 (Monterey). Built from the latest macOS Monterey image. See https://github.com/megabyte-labs/packer-macos-desktop for more details."
   }
 }
