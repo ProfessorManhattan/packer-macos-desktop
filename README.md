@@ -36,7 +36,7 @@
     <img alt="Version: 1.0.0" src="https://img.shields.io/badge/version-1.0.0-blue.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAACNJREFUCNdjIACY//+BEp9hhM3hAzYQwoBIAqEDYQrCZLwAAGlFKxU1nF9cAAAAAElFTkSuQmCC&cacheSeconds=2592000&style=flat-square" />
   </a>
   <a title="Pipeline status" href="https://gitlab.com/megabyte-labs/packer/macos-desktop/-/commits/master" target="_blank">
-    <img alt="Pipeline status" src="https://img.shields.io/gitlab/pipeline-status/playbook_path?branch=master&label=build&logo=gitlab&style=flat-square">
+    <img alt="Pipeline status" src="https://img.shields.io/gitlab/pipeline-status/megabyte-labs/packer/macos-desktop?branch=master&label=build&logo=gitlab&style=flat-square">
   </a>
   <a title="Hyper-V build status" href="https://gitlab.com/megabyte-labs/packer/macos-desktop/-/commits/master" target="_blank">
     <img alt="Hyper-V build status" src="https://img.shields.io/gitlab/pipeline-status/megabyte-labs/packer/macos-desktop?branch=hyperv&label=build&logo=hyper&style=flat-square">
@@ -76,6 +76,7 @@
 - [Creating Your Own Box](#creating-your-own-box)
 - [Updating Your Box](#updating-your-box)
 - [Contributing](#contributing)
+  - [Affiliates](#affiliates)
 - [License](#license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -86,9 +87,9 @@ This project is home to the configurations necessary to build VM images for [mac
 
 This project:
 
-- Currently builds a minimal macOS 11.0.0 (Big Sur) VM image by default
+- Currently builds a minimal macOS 11.0.0 (Monterey) VM image by default
 - May contain multiple templates which will all end in `template.json` and be present in the root of the project
-- Automates the process of keeping our [macOS 11.0.0 (Big Sur) VM images](https://app.vagrantup.com/Megabyte/boxes/macOS-Desktop) up-to-date with the latest upstream source by (1) using the `vagrant-cloud` post-processor to automatically upload the box after it is built and (2) running the build with a cronjob
+- Automates the process of keeping our [macOS 11.0.0 (Monterey) VM images](https://app.vagrantup.com/Megabyte/boxes/macOS-Desktop) up-to-date with the latest upstream source by (1) using the `vagrant-cloud` post-processor to automatically upload the box after it is built and (2) running the build with a cronjob
 - In some cases, [LatestOS](https://pypi.org/project/latestos/) is used to automatically update the link to the base image / checksums to the latest release
 
 ### Supported Virtualization Platforms
@@ -123,7 +124,7 @@ The default username and password are both _vagrant_.
 
 ## Creating Your Own Box
 
-You can quickly use this project to create your own minimal macOS 11.0.0 (Big Sur) box by:
+You can quickly use this project to create your own minimal macOS 11.0.0 (Monterey) box by:
 
 1. Creating a box on VagrantUp titled macOS-Desktop (Note: The VagrantUp box name should match the `"box_basename"` in the `template.json` file.)
 2. Changing the `"vagrantup_user"` variable in `template.json` to your VagrantUp username
@@ -148,7 +149,7 @@ If you do not want your box to be automatically uploaded to VagrantUp after you 
 
 ## Updating Your Box
 
-If a new release of the macOS 11.0.0 (Big Sur) system is available, you can update your VagrantUp box. You can do this by changing the `"iso_checksum_url"`, `"iso_url"`, and `"iso_version"` variables in the `template.json` file. After that, run `packer build -only=virtualbox-iso template.json` to build the image again.
+If a new release of the macOS 11.0.0 (Monterey) system is available, you can update your VagrantUp box. You can do this by changing the `"iso_checksum_url"`, `"iso_url"`, and `"iso_version"` variables in the `template.json` file. After that, run `packer build -only=virtualbox-iso template.json` to build the image again.
 
 <a href="#contributing" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -177,6 +178,17 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </a>
 <a href="https://www.patreon.com/ProfessorManhattan" title="Support us on Patreon" target="_blank">
   <img alt="Patreon" src="https://img.shields.io/badge/Patreon-Support-052d49?logo=patreon&logoColor=white&style=for-the-badge" />
+</a>
+
+### Affiliates
+
+Below you will find a list of services we leverage that offer special incentives for signing up for their services through our special links:
+
+<a href="http://eepurl.com/h3aEdX" title="Sign up for $30 in MailChimp credits" target="_blank">
+  <img alt="MailChimp" src="https://cdn-images.mailchimp.com/monkey_rewards/grow-business-banner-2.png" />
+</a>
+<a href="https://www.digitalocean.com/?refcode=751743d45e36&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+  <img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" />
 </a>
 
 </details>

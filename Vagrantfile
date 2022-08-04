@@ -4,7 +4,7 @@
 Vagrant.require_version ">= 1.6.2"
 
 cpus = 2
-description = "macOS 11.0.0 (Big Sur)"
+description = "macOS 11.0.0 (Monterey)"
 memory = 4096
 
 Vagrant.configure("2") do |config|
